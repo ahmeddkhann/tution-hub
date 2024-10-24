@@ -7,7 +7,7 @@ export async function POST (request){
 
         const {name, email, username, password, gender, phone} = await request.json()
 
-        if (!name || !email || !username || !password || !gender || phone){
+        if (!name || !email || !username || !password || !gender || !phone){
             return Response.json(
                 {
                     success: false,
@@ -17,7 +17,7 @@ export async function POST (request){
             )
         }
 
-        const usedUsername = await userModel.findOne((username))
+        const usedUsername = await userModel.findOne({username})
         if (usedUsername){
             return Response.json(
                 {
@@ -28,7 +28,7 @@ export async function POST (request){
             )
         }
 
-        const usedEmail = await userModel.findOne((email))
+        const usedEmail = await userModel.findOne({email})
         if (usedEmail){
             return Response.json(
                 {
